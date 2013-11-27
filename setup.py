@@ -6,7 +6,7 @@ import os
 from setuptools import setup
 from setuptools import find_packages
 
-import titovantoncore
+import bicycle
 
 
 def read(fname):
@@ -17,7 +17,7 @@ def read(fname):
 
 
 setup(name="bicycle",
-      version=titovantoncore.__version__,
+      version=bicycle.__version__,
       description="My helpers.",
       long_description=read("README.rst"),
       author="Titov Anton",
