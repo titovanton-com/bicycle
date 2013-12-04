@@ -29,7 +29,16 @@ class QRCodeMixin(models.Model):
     qr_code_admin.short_description = u'QR Код'
     qr_code_admin.allow_tags = True
 
+    def qr_background(self, img):
+        return (
+            # bg_img, left, top
+        )
+
     def qr_settings(self):
+        """ QRCode settings
+
+        https://github.com/lincolnloop/python-qrcode
+        """
         return {}
 
     def qr_encode_data(self):
@@ -45,7 +54,15 @@ class QRCodeMixin(models.Model):
         qr.add_data(self.qr_encode_data())
         qr.make(fit=stngs['fit'])
         img = qr.make_image(image_factory=MagickImage)
-        self.qr_code.save('qr.png', ContentFile(img.get_blob()), save=False)
+        background = self.qr_background(img)
+        name = 'qr.png'
+        if background:
+            bg_img, left, top = background
+            bg_img.composite(img._img, left, top)
+            blob = bg_img.make_blob()
+        else:
+            blob = img.get_blob()
+        self.qr_code.save(name, ContentFile(blob), save=False)
         super(QRCodeMixin, self).save(*args, **kwargs)
 
     class Meta(object):

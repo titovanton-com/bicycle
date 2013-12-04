@@ -1,5 +1,6 @@
 # coding: UTF-8
 
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.views.generic import View
@@ -33,6 +34,15 @@ class RenderWithContextMixin(ContextMixin):
 
     def redirect(*args, **kwargs):
         return redirect(*args, **kwargs)
+
+
+class FileResponseMixin(object):
+
+    def file_response(self, file_url, filename):
+        response = HttpResponse(mimetype='application/force-download')
+        response['Content-Disposition'] = 'attachment; filename=%s' % filename
+        response['X-Accel-Redirect'] = file_url
+        return response
 
 
 class ToDoView(ToDoMixin, View):

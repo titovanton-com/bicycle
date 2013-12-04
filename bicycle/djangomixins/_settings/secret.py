@@ -7,3 +7,5 @@ U must add it to .gitignore file
 SECRET_KEY = None
 
 DATABASES_PASSWORD = '1'
+
+PROJECT_URL = 'myapp.localsite.com'

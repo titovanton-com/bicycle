@@ -43,3 +43,9 @@ class MagickImage(BaseImage):
             transform = lambda x: x.lower()
         return super(MagickImage, self).check_kind(
             kind, transform=transform, **kwargs)
+
+    def get_width(self):
+        return self._img.width
+
+    def get_height(self):
+        return self._img.height

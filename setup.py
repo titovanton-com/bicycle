@@ -16,6 +16,11 @@ def read(fname):
         return ''
 
 
+def without_mainapp(item):
+    return not bool(item.find('mainapp') + 1)
+
+packages = filter(without_mainapp, find_packages())
+
 setup(name="bicycle",
       version=bicycle.__version__,
       description="My helpers.",
@@ -24,6 +29,5 @@ setup(name="bicycle",
       author_email="mail@titovanton.com",
       license="BSD",
       url="https://github.com/titovanton-com/bicycle",
-      packages=find_packages(),
+      packages=packages,
       zip_safe=False)
-

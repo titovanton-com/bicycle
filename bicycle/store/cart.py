@@ -6,10 +6,6 @@ from django.db import models
 from django.db.models.query import EmptyQuerySet
 from bicycle.djangomixins.shortcuts import session_start
 
-from models import ProductBase
-from models import CartItemBase
-from models import OrderItemBase
-
 
 def default_return(func):
     """
@@ -24,9 +20,9 @@ def default_return(func):
 
 
 class CartBase(object):
-    PRODUCT_MODEL = ProductBase
-    CART_ITEM_MODEL = CartItemBase
-    ORDER_ITEM_MODEL = OrderItemBase
+    PRODUCT_MODEL = None
+    CART_ITEM_MODEL = None
+    ORDER_ITEM_MODEL = None
 
     cart_items = EmptyQuerySet()
     request = None
