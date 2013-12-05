@@ -1,0 +1,3 @@
+[submodule "bicycle"]
+	path = bicycle
+	url = https://github.com/titovanton-com/bicycle-submodule.git
